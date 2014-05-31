@@ -1,0 +1,73 @@
+<html>
+<head>
+<link rel="stylesheet" href="http://wicky.nillia.ms/headroom.js/assets/styles/main.css?v=2">
+</head>
+<body>
+<header id="header" class="header header--fixed hide-from-print slide headroom--not-top slide--up">
+	<hr>
+	my header
+	<hr>
+</header>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+	<h1>hello</h1>
+
+
+<script src="http://wicky.nillia.ms/headroom.js/assets/scripts/main.js?v=2"></script>
+<script>
+
+(function() {
+ var header = document.querySelector("#header");
+ if(window.location.hash) {
+ header.classList.add("slide--up");
+ }
+
+ new Headroom(header, {
+tolerance: {
+down : 10,
+up : 20
+},
+offset : 205,
+classes: {
+initial: "slide",
+pinned: "slide--reset",
+unpinned: "slide--up"
+}
+}).init();
+
+ }());
+
+
+</script>
+</body>
+</html>
+
