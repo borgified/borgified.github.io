@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "StrongDM"
+title:  "user account creation"
 date:   2017-06-20 14:52:45 -0700
 categories: strongdm
 ---
