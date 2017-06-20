@@ -27,4 +27,4 @@ In comparing my own implementation of user account management vs a commercially 
 
 If you’re going to script this yourself, don’t underestimate the importance of ease of use. This makes or breaks the project. If the users don't get a vast improvement in user experience, it's really hard to move them off of something that "already works". In my case, I wrapped my scripts around a simple web cgi-bin interface (works everywhere) that lets the user terminate accounts in multiple services with a single click and since the original manual process was so painful and time consuming, I was pretty certain that my scripts would be used.  
 
-If you need functionality beyond useradds, like fine grained permission or audit logs, check out strongDM.
+If you need functionality beyond useradds, like fine grained permission or audit logs, check out [strongDM](https://strongdm.com/).
