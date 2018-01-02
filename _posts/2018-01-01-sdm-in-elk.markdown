@@ -5,7 +5,7 @@ date:   2018-01-01 23:43:17 -0800
 categories: jekyll update
 ---
 
-A little while back, the team at StrongDM released an auditing feature that lets you peek at the full history of who ran what queries and how long they took. It's a pretty nifty feature because now that we have this visibility (since every SQL query is proxied through sdm), we're able to pipe these logs into our logging system and create graphs and dashboards. For us, we are interested in seeing who's been holding up the database server with "long running queries", (unoptimized queries that take a long time to run, eg. if its running an operation on a table with millions of rows and can potentially create contention with other queries that may also want to use the same table)
+A little while back, the team at [StrongDM](https://www.strongdm.com/) released an auditing feature that lets you peek at the full history of who ran what queries and for how long. It's a pretty nifty feature because now that we have this visibility (since every SQL query is proxied through sdm), we're able to pipe these logs into our logging system and create graphs and dashboards. For us, we are interested in seeing who's been holding up the database server with "long running queries", (unoptimized queries that take a long time to run, eg. if its running an operation on a table with millions of rows and can potentially create contention with other queries that may also want to use the same table)
 
 Because SDM outputs json logs, it is trivial to feed it into a logging system like an ELK (Elasticsearch Logstash Kibana) stack. You'd only have to specify a json filter and logstash will automatically understand how each datapoint is labelled (you won't need to get grok filters to work).
 
@@ -76,4 +76,4 @@ you can see that each field as already been separated out thanks to the json for
 
 `durationMs:>500`
 
-
+With these real time graphs, we're now able to pinpoint exactly which query is affecting the performance of our database and with enough datapoints, we also have the trending data that allows us to make better decisions on how to spread the load across our servers.
