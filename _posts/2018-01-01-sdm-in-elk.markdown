@@ -29,7 +29,7 @@ this should produce a bunch of json looking logs like this:
 ```
 
 As you can see, the json logs have a very flat structure which is ideal for feeding it into logstash. The end result, after the logs are ingested into ELK, should look like this:
-[sdmelk.png](https://github.com/borgified/borgified.github.io/raw/master/_posts/2018-01-01-sdm-in-elk-01.png)
+![sdmelk.png](https://github.com/borgified/borgified.github.io/raw/master/_posts/2018-01-01-sdm-in-elk-01.png)
 
 Let's stand up our ELK stack next.
 
