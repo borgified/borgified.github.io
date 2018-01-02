@@ -1,0 +1,79 @@
+---
+layout: post
+title:  "SDM in ELK"
+date:   2018-01-01 23:43:17 -0800
+categories: jekyll update
+---
+
+A little while back, the team at StrongDM released an auditing feature that lets you peek at the full history of who ran what queries and how long they took. It's a pretty nifty feature because now that we have this visibility (since every SQL query is proxied through sdm), we're able to pipe these logs into our logging system and create graphs and dashboards. For us, we are interested in seeing who's been holding up the database server with "long running queries", (unoptimized queries that take a long time to run, eg. if its running an operation on a table with millions of rows and can potentially create contention with other queries that may also want to use the same table)
+
+Because SDM outputs json logs, it is trivial to feed it into a logging system like an ELK (Elasticsearch Logstash Kibana) stack. You'd only have to specify a json filter and logstash will automatically understand how each datapoint is labelled (you won't need to get grok filters to work).
+
+First, let's take a look at some sample logs from sdm audit:
+
+```sdm audit queries -f -j```
+
+this should produce a bunch of json looking logs like this:
+
+```json
+{"timestamp":"2018-01-02T10:58:08.016628774Z","datasourceID":131,"datasourceName":"test (testuser@dbserver.local)","userID":1212,"userName":"Dummy User","durationMs":332,"query":"SHOW COLUMNS FROM `mytable`.`somecolumn_special_project_orders`"}
+{"timestamp":"2018-01-02T10:58:08.616304656Z","datasourceID":131,"datasourceName":"test (testuser@dbserver.local)","userID":1212,"userName":"Dummy User","durationMs":335,"query":"SHOW TRIGGERS FROM `mytable` WHERE `Table` = 'somecolumn_special_project_orders'"}
+{"timestamp":"2018-01-02T10:58:09.119676642Z","datasourceID":131,"datasourceName":"test (testuser@dbserver.local)","userID":1212,"userName":"Dummy User","durationMs":322,"query":"SHOW COLUMNS FROM `mytable`.`somecolumn_special_project_skus`"}
+{"timestamp":"2018-01-02T10:58:09.63434265Z","datasourceID":131,"datasourceName":"test (testuser@dbserver.local)","userID":1212,"userName":"Dummy User","durationMs":333,"query":"SHOW TRIGGERS FROM `mytable` WHERE `Table` = 'somecolumn_special_project_skus'"}
+{"timestamp":"2018-01-02T10:58:10.161009814Z","datasourceID":131,"datasourceName":"test (testuser@dbserver.local)","userID":1212,"userName":"Dummy User","durationMs":335,"query":"SHOW COLUMNS FROM `mytable`.`somecolumn_special_project_templates`"}
+{"timestamp":"2018-01-02T10:58:10.668393917Z","datasourceID":131,"datasourceName":"test (testuser@dbserver.local)","userID":1212,"userName":"Dummy User","durationMs":340,"query":"SHOW TRIGGERS FROM `mytable` WHERE `Table` = 'somecolumn_special_project_templates'"}
+{"timestamp":"2018-01-02T10:58:11.171474613Z","datasourceID":131,"datasourceName":"test (testuser@dbserver.local)","userID":1212,"userName":"Dummy User","durationMs":325,"query":"SHOW COLUMNS FROM `mytable`.`somecolumn_special_projects`"}
+{"timestamp":"2018-01-02T10:58:11.781579949Z","datasourceID":131,"datasourceName":"test (testuser@dbserver.local)","userID":1212,"userName":"Dummy User","durationMs":331,"query":"SHOW TRIGGERS FROM `mytable` WHERE `Table` = 'somecolumn_special_projects'"}
+{"timestamp":"2018-01-02T10:58:12.280703934Z","datasourceID":131,"datasourceName":"test (testuser@dbserver.local)","userID":1212,"userName":"Dummy User","durationMs":323,"query":"SHOW COLUMNS FROM `mytable`.`somecolumn_spreadsheet_images`"}
+{"timestamp":"2018-01-02T10:58:12.801529956Z","datasourceID":131,"datasourceName":"test (testuser@dbserver.local)","userID":1212,"userName":"Dummy User","durationMs":345,"query":"SHOW TRIGGERS FROM `mytable` WHERE `Table` = 'somecolumn_spreadsheet_images'"}
+```
+
+As you can see, the json logs have a very flat structure which is ideal for feeding it into logstash. The end result, after the logs are ingested into ELK, should look like this:
+[sdmelk.png](https://github.com/borgified/borgified.github.io/raw/master/_posts/2018-01-01-sdm-in-elk-01.png)
+
+Let's stand up our ELK stack next.
+
+You'll need to install [Docker](https://www.docker.com/get-docker).
+
+`git clone https://github.com/deviantony/docker-elk.git`
+
+`cd docker-elk`
+
+Here we'll need to add the json filter:
+
+`vi logstash/pipeline/logstash.conf`
+
+```
+#Add your filters...
+filter{
+    json{
+          source => "message"
+            }
+}
+```
+
+save and quit (:wq)
+
+`docker-compose up`
+
+That's all for ELK. Now let's send some data into logstash's input port (5000) with the command we used earlier.
+
+`sdm audit queries -f -j | nc localhost 5000`
+
+At this point, we are ready to view the data in Kibana. Open browser to: [localhost:5601](http://localhost:5601)
+
+Perform these actions to set up Kibana for the first time: 
+```
+click management->index pattern
+type * in the index pattern box
+next step
+@timestamp
+create index pattern
+click discover
+```
+
+you can see that each field as already been separated out thanks to the json format, this means you can do searches like:
+
+`durationMs:>500`
+
+
