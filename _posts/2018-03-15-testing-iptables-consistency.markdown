@@ -9,12 +9,12 @@ Testing whether the rules in /etc/sysconfig/iptables match what's currently runn
 
 The general strategy is as follows:
 
-1. download /etc/sysconfig/iptables (call it iptables_file)
-2. run /sbin/iptables-save and save the output to a file (call it iptables_mem)
+1. download /etc/sysconfig/iptables (call it `iptables_file`)
+2. run /sbin/iptables-save and save the output to a file (call it `iptables_mem`)
 3. spin up a docker container with iptables installed
-4. load /sbin/iptables-restore < iptables_mem and dump it back out: /sbin/iptables-save > iptables_mem_out
-5. load /sbin/iptables-restore < iptables_file and dump it back out: /sbin/iptables-save > iptables_file_out
-6. diff iptables_mem_out iptables_file_out
+4. load `/sbin/iptables-restore < iptables_mem` and dump it back out: `/sbin/iptables-save > iptables_mem_out`
+5. load `/sbin/iptables-restore < iptables_file` and dump it back out: `/sbin/iptables-save > iptables_file_out`
+6. `diff iptables_mem_out iptables_file_out`
 
 Here's my Dockerfile
 
@@ -68,3 +68,6 @@ diff -I'^#' iptables_mem_out iptables_file_out
 ```
 
 Obviously you need docker already installed locally. Also, it's assumed that you are able to ssh to the server passwordlessly (via public/priv ssh keys). The only real obstacle to make this work was realizing that I needed to include the --cap-add flags in my docker run commands. These are necessary to be able to interact with the network stack (ie. run iptables), otherwise you get errors like "you dont have permission to do that" even though you are root.
+
+You can run the above script and give it the server you are testing as argument: `./consistent_iptables.sh myserver.com`
+Leave the Dockerfile in the same directory as the script so it can run the docker build command properly. Happy auditing!
