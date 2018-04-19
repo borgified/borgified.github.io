@@ -1,0 +1,10 @@
+---
+layout: post
+title:  "converting files to utf-8"
+date:   2018-04-18 20:46:58 -0700
+categories: scripting
+---
+
+Sometimes these subtitle files you find online have some funny utf-16le encoding and your video player doesn't know how to interpret it and just displays gibberish. This script will detect the encoding used, then convert the file to utf-8 which presumably most video players should be able to handle. This is my third python script but I think it's pretty useful, just starting to learn the language and also didn't want to keep uploading to the srt converter websites. Enjoy!
+
+[convert.py](https://github.com/borgified/convert)
