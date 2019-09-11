@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "installing java in travis ci"
-date:   2019-07-15 20:37:02 +0000
+date:   2019-07-15 20:37:03 +0000
 categories: travisci, android
 ---
 
