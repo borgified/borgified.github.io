@@ -16,10 +16,7 @@
 title: Excursions into the Void
 email: borgified@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  This is yet another devops blog. It's probably going to be about trying out
-  new stuff, what worked, what didn't and in the best scenario, if you find
-  what you are searching for right here, these notes may be able to save you
-  some time.
+  I take notes here.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: borgified
