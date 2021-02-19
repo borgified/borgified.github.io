@@ -1,5 +1,5 @@
 # simpler is better
-these are some just my devops notes
+these are just some of my devops notes
 
 * [2021-02-18-cracking-p12](posts/2021-02-18-cracking-p12.md)
 * [2021-02-17-check-ssl-certs](posts/2021-02-17-check-ssl-certs.md)
