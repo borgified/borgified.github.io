@@ -1,5 +1,5 @@
 # simpler is better
-these are some just some typical devops notes
+these are some just my devops notes
 
 * [2021-02-17-check-ssl-certs](posts/2021-02-17-check-ssl-certs.markdown)
 * [2020-07-25-nginx-reverse-proxy-fronting-docker-based-wordpress](posts/2020-07-25-nginx-reverse-proxy-fronting-docker-based-wordpress.markdown)
