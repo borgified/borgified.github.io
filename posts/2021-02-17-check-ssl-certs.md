@@ -31,3 +31,9 @@ for i in `cat a | awk '{print $1}' | sed -e s/\.$//`; do
 done
 exit 0
 ```
+
+the output can be transposed to a csv format with this: (assuming output is saved to file "z")
+
+```
+cat z | sed -e 's/^/"/' | sed -e $'s/$/"/' | tr -s '\n' ',' | sed -e $'s/,"=====================",/\\\n/g'
+```
