@@ -1,6 +1,7 @@
 # simpler is better
 these are just some of my devops notes
 
+* [2021-12-09-recovering-from-bad-jenkins-plugin-upgrade](posts/2021-12-09-recovering-from-bad-jenkins-plugin-upgrade.md)
 * [2021-02-18-cracking-p12](posts/2021-02-18-cracking-p12.md)
 * [2021-02-17-check-ssl-certs](posts/2021-02-17-check-ssl-certs.md)
 * [2020-07-25-nginx-reverse-proxy-fronting-docker-based-wordpress](posts/2020-07-25-nginx-reverse-proxy-fronting-docker-based-wordpress.md)
