@@ -20,3 +20,5 @@ If you are able to retrieve your secret this way, then you are ready to do it in
     - debug:
         msg: "{{ lookup('hashi_vault', 'secret=hello/data/mysecret token=xxxx url=https://vault.url') }}"
 ```
+
+more help: https://stackoverflow.com/questions/63068001/hashicorp-vault-no-handler-for-route-error-despite-secrets-engine-being-enabled
