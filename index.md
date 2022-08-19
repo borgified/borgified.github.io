@@ -1,6 +1,8 @@
 # simpler is better
 these are just some of my devops notes
 
+* [2022-08-18-elasticsearch-grok-patterns](posts/2022-08-18-elasticsearch-grok-patterns.md)
+* [2022-01-22-decrypting-jenkins-secrets](posts/2022-01-22-decrypting-jenkins-secrets.md)
 * [2022-01-20-hashicorp-vault-with-ansible](posts/2022-01-20-hashicorp-vault-with-ansible.md)
 * [2022-01-19-install-ansible-plugins](posts/2022-01-19-install-ansible-plugins.md)
 * [2021-12-09-recovering-from-bad-jenkins-plugin-upgrade](posts/2021-12-09-recovering-from-bad-jenkins-plugin-upgrade.md)
