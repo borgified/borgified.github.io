@@ -18,5 +18,3 @@ these are just some of my devops notes
 * [2018-01-01-sdm-in-elk](posts/2018-01-01-sdm-in-elk.md)
 * [2017-12-21-consul-and-autopilot](posts/2017-12-21-consul-and-autopilot.md)
 * [2017-06-20-user-account-creation](posts/2017-06-20-user-account-creation.md)
-
-[aaa](http://172.16.1.49)
